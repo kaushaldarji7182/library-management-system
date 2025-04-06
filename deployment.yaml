@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-lms-deployment
+  labels:
+    app: flask-lms
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: flask-lms
+  template:
+    metadata:
+      labels:
+        app: flask-lms
+    spec:
+      containers:
+        - name: flask-lms-container
+          image: kaushal2118/flask-lms
+          ports:
+            - containerPort: 5000
+          env:
+            - name: FLASK_RUN_HOST
+              value: "0.0.0.0"
+
